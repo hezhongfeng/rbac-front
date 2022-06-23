@@ -15,9 +15,6 @@ const currentRoute = useRoute();
 const router = useRouter();
 
 const asyncRoutes = useAsyncRoutes();
-// const store = useStore();
-
-// const menus = computed(() => store.getters['asyncroute/getMenus']);
 
 const selectedKey = ref('');
 

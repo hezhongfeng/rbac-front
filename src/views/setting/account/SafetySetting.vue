@@ -72,7 +72,6 @@ const root = useRootStore();
 
 const userInfo = root.userInfo;
 
-
 const model = ref({
   password: '',
   newPassword: '',
@@ -96,15 +95,15 @@ const submitCallback = () => {
 
 const updatePassword = () => {
   http
-    .put(`${urls.user.user}/${userInfo.userId}/password`, {
+    .put(`${urls.user.user}/${userInfo.userId.value}/password`, {
       password: model.value.password,
       newPassword: model.value.newPassword
     })
     .then(() => {
       showModal.value = false;
       message.success('修改成功，请重新登录');
-      store.commit('updateToken', '');
-      store.commit('updateUserId', null);
+      root.updateToken('');
+      root.updateUserId(null);
       // 等待清除我完毕
       nextTick(() => {
         router.push('/login');

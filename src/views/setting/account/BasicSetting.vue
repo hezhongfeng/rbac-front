@@ -61,8 +61,8 @@ const formValue = ref({
 
 const save = () => {
   http
-    .put(`/api/v1/users/${userInfo.userId}`, {
-      id: userInfo.userId,
+    .put(`/api/v1/users/${userInfo.userId.value}`, {
+      id: userInfo.userId.value,
       nickname: formValue.value.nickname,
       description: formValue.value.description
     })
