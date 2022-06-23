@@ -6,10 +6,10 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useIndexStore } from '@/store/index';
-const indexStore = useIndexStore();
+import { useRootStore } from '@/store/root';
+const root = useRootStore();
 
-const nickname = computed(() => indexStore.nickname);
+const nickname = computed(() => root.nickname);
 </script>
 
 <style lang="scss">

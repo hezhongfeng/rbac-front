@@ -64,11 +64,6 @@ const columns = [
     key: 'tel'
   },
   {
-    title: '机构',
-    key: 'organization',
-    render: row => row.organization?.name || '--'
-  },
-  {
     title: '角色',
     key: 'roles',
     render(row) {

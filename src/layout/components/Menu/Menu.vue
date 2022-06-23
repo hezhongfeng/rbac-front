@@ -1,11 +1,11 @@
 <template>
-  <n-menu ref="menuInstRef" :options="menus" :value="selectedKey" @update:value="clickMenuItem" />
+  <n-menu ref="menuInstRef" :options="asyncRoutes.menus" :value="selectedKey" @update:value="clickMenuItem" />
 </template>
 
 <script setup name="Menu">
 import { ref, computed, watch, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+import { useAsyncRoutes } from '@/store/asyncRoutes';
 
 const menuInstRef = ref(null);
 
@@ -14,9 +14,10 @@ const currentRoute = useRoute();
 
 const router = useRouter();
 
-const store = useStore();
+const asyncRoutes = useAsyncRoutes();
+// const store = useStore();
 
-const menus = computed(() => store.getters['asyncroute/getMenus']);
+// const menus = computed(() => store.getters['asyncroute/getMenus']);
 
 const selectedKey = ref('');
 

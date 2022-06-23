@@ -60,7 +60,7 @@ import { useMessage } from 'naive-ui';
 import http from 'utils/http';
 import urls from '@/common/urls';
 import { useRouter } from 'vue-router';
-import { useIndexStore } from '@/store/index';
+import { useRootStore } from '@/store/root';
 
 const message = useMessage();
 
@@ -68,9 +68,9 @@ const showModal = ref(false);
 const formRef = ref(null);
 
 const router = useRouter();
-const indexStore = useIndexStore();
+const root = useRootStore();
 
-const userInfo = indexStore.userInfo;
+const userInfo = root.userInfo;
 
 
 const model = ref({

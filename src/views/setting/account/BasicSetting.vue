@@ -35,7 +35,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useMessage } from 'naive-ui';
-import { useIndexStore } from '@/store/index';
+import { useRootStore } from '@/store/root';
 import http from 'utils/http';
 
 const rules = {
@@ -61,9 +61,9 @@ const rules = {
 const formRef = ref(null);
 const message = useMessage();
 
-const indexStore = useIndexStore();
+const root = useRootStore();
 
-const userInfo = indexStore.userInfo;
+const userInfo = root.userInfo;
 
 // 使用当前的值初始化
 const formValue = ref({
@@ -85,7 +85,7 @@ const save = () => {
     })
     .then(() => {
       message.success('保存成功');
-      indexStore.getCurrentUser();
+      root.getCurrentUser();
     })
     .catch(err => {
       message.error(err.message);

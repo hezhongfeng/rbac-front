@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useIndexStore } from '@/store/index';
+import { useRootStore } from '@/store/root';
 import router from '@/router';
 
 axios.defaults.baseURL = window.location.origin;
@@ -38,10 +38,10 @@ axios.interceptors.response.use(
             break;
           }
 
-          const indexStore = useIndexStore();
-          indexStore.updateUserId(null);
+          const root = useRootStore();
+          root.updateUserId(null);
           // 清除无效 token
-          indexStore.updateToken('');
+          root.updateToken('');
 
           err.message = '未授权，请登录';
           setTimeout(() => {

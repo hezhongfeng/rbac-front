@@ -51,10 +51,10 @@
 import { ref } from 'vue';
 import { useMessage } from 'naive-ui';
 import http from 'utils/http';
-import { useIndexStore } from '@/store/index';
+import { useRootStore } from '@/store/root';
 import { useRouter } from 'vue-router';
 
-const indexStore = useIndexStore();
+const root = useRootStore();
 const router = useRouter();
 const formRef = ref(null);
 const message = useMessage();
@@ -76,9 +76,9 @@ const login = () => {
     .then(async ({ data }) => {
       console.log('登录成功');
       message.success('登录成功!');
-      indexStore.updateToken(data.token);
-      indexStore.updateUserId(data.user);
-      indexStore.getCurrentUser(() => {
+      root.updateToken(data.token);
+      root.updateUserId(data.user);
+      root.getCurrentUser(() => {
         // 跳转到主页
         router.push('/index/dashboard_console');
       });

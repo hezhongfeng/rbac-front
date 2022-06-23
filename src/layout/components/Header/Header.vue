@@ -45,10 +45,9 @@
 <script setup name="PageHeader">
 import { ref, computed, nextTick } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import { useStore } from 'vuex';
+import { useRootStore } from '@/store/root';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@vicons/antd';
 import { useDialog } from 'naive-ui';
-import http from '@/utils/http';
 
 defineProps({
   collapsed: {
@@ -60,12 +59,12 @@ const emit = defineEmits(['update:collapsed']);
 
 const dialog = useDialog();
 
-const store = useStore();
+const root = useRootStore();
 
 const router = useRouter();
 const route = useRoute();
 
-const nickname = computed(() => store.state.nickname);
+const nickname = computed(() => root.nickname);
 
 const setCookies = ref([]);
 
@@ -98,26 +97,14 @@ const doLogout = () => {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      http
-        .post('/api/v1/logout', {})
-        .then(({ data }) => {
-          store.commit('updateToken', '');
-          store.commit('updateUserId', null);
-
-          for (const client of data.clients) {
-            setCookies.value.push(`${client.cookieURL}?token=${client.token}`);
-          }
-
-          setTimeout(() => {
-            // 等待清除我完毕
-            nextTick(() => {
-              router.push('/login');
-            });
-          }, 100);
-        })
-        .catch(err => {
-          console.log('err', err);
+      root.updateToken('');
+      root.updateUserId(null);
+      setTimeout(() => {
+        // 等待清除我完毕
+        nextTick(() => {
+          router.push('/login');
         });
+      }, 100);
     }
   });
 };

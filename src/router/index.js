@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useIndexStore } from '@/store/index';
+import { useRootStore } from '@/store/root';
 import Login from 'views/login/Login.vue';
 import Logout from 'views/login/Logout.vue';
 import axios from 'axios';
@@ -30,9 +30,9 @@ const routes = [
 ];
 
 const beforeEach = async (to, from, next) => {
-  const indexStore = useIndexStore();
+  const root = useRootStore();
   // 当前用户信息
-  const userId = indexStore.userId;
+  const userId = root.userId;
   let hasUserId = !!userId;
   const accessToken = localStorage.getItem('access_token');
 
@@ -71,7 +71,7 @@ const beforeEach = async (to, from, next) => {
   // 已登录，在刷新页面
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
   // 注意这里不能使用回调的方式，必须await
-  await indexStore.getCurrentUser();
+  await root.getCurrentUser();
   next({ ...to, replace: true });
 };
 

@@ -1,10 +1,11 @@
-import { defineStore } from 'pinia';
+import { defineStore, acceptHMRUpdate } from 'pinia';
 import { ref, computed } from 'vue';
 import axios from 'axios';
 import urls from '@/common/urls';
 import http from '@/utils/http';
+import { useAsyncRoutes } from './asyncRoutes';
 
-export const useIndexStore = defineStore('counter', () => {
+export const useRootStore = defineStore('root', () => {
   const accseeToken = ref('');
   const userId = ref(null);
   const username = ref('');
@@ -39,15 +40,21 @@ export const useIndexStore = defineStore('counter', () => {
 
   const getCurrentUser = callback => {
     const current = urls.login.current;
+    const asyncRoutes = useAsyncRoutes();
     return new Promise((resolve, reject) => {
       http
         .get(current)
         .then(({ data }) => {
           updateUserInfo(data);
-          if (callback) {
-            callback();
-          }
-          resolve();
+          asyncRoutes.generateRoutes({
+            permissions: data.permissions,
+            cb: () => {
+              if (callback) {
+                callback();
+              }
+              resolve();
+            }
+          });
         })
         .catch(err => {
           console.log('ERR_GET_CURRENT: ', err);
@@ -56,5 +63,9 @@ export const useIndexStore = defineStore('counter', () => {
     });
   };
 
-  return { userId, username, userInfo, updateUserId, updateToken, getCurrentUser };
+  return { userId, username, nickname, userInfo, updateUserId, updateToken, getCurrentUser };
 });
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useRootStore, import.meta.hot));
+}
