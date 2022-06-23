@@ -1,0 +1,149 @@
+:root {
+  --primary-color: #09b3af;
+  --primary-font-size: 14px;
+  --title-font-size: 16px;
+  --primary-font-weight: 400;
+  --title-font-weight: 500;
+  --light-font-color: rgba(0, 0, 0, 0.45);
+  /* 浅色背景下的主要文字颜色 */
+  --primary-black-color: rgba(0, 0, 0, 65%);
+  /* 浅色背景下的title文字颜色 */
+  --title-black-color: rgba(0, 0, 0, 85%);
+  --primary-white-color: rgba(255, 255, 255, 65%);
+  --title-white-color: rgba(255, 255, 255, 85%);
+  --vxe-table-header-background-color: #f5f7fa;
+  --vxe-table-sort-btn-color: #c0c4cc;
+  --vxe-table-body-background-color: #fff;
+  --vxe-table-current-row-background-color: #e6f7ff;
+  --vxe-table-current-row-hover-color: #d7effb;
+  --vxe-table-border-color: #e8eaec;
+  --vxe-table-tr-border-color: #e8eaec;
+  --vxe-table-text-color: rgba(0, 0, 0, 85%);
+  --scrollbar-background-color: #ccc;
+  --vxe-table-checkbox-background-color: #fff;
+  --vxe-table-checkbox-border-color: #d9d9d9;
+  --group-list-selected-item-background-color: #daf2ee;
+  --group-list-item-hover-color: var(--primary-color);
+  --side-menu-logo-color: var(--title-black-color);
+  --side-menu-highlight-color: #fff;
+  --side-menu-highlight-bg-color: var(--primary-color);
+  --side-menu-box-shadow: 1px 0px 4px rgb(0 21 41 / 8%);
+  --side-menu-sub-box-shadow: 0px 2px 6px 2px rgb(0 21 41 / 8%) inset;
+  --tag-color-success: #69db7c;
+  --tag-color-processing: #4dabf7;
+  --tag-color-failed: #ff8787;
+  --disabled-color: rgba(0, 0, 0, 0.25);
+}
+
+/* vxe-table样式覆盖 */
+.vxe-table--render-default {
+  font-size: var(--primary-font-size);
+  color: var(--vxe-table-text-color);
+}
+.vxe-table--render-default .vxe-table--body-wrapper {
+  background-color: var(--vxe-table-body-background-color);
+}
+.vxe-table--render-default .vxe-body--row.row--hover {
+  background-color: var(--vxe-table-header-background-color);
+}
+.vxe-table--render-default .vxe-body--row.row--current {
+  background-color: var(--vxe-table-current-row-background-color);
+}
+.vxe-table--render-default .vxe-body--row.row--current.row--hover {
+  background-color: var(--vxe-table-current-row-hover-color);
+}
+.vxe-table .vxe-table--header-wrapper {
+  color: var(--title-black-color);
+}
+.vxe-table--render-default.border--default .vxe-table--header-wrapper,
+.vxe-table--render-default.border--full .vxe-table--header-wrapper,
+.vxe-table--render-default.border--outer .vxe-table--header-wrapper {
+  background-color: var(--vxe-table-header-background-color);
+}
+.vxe-table--render-default .vxe-table--border-line {
+  border-color: var(--vxe-table-border-color);
+}
+.vxe-header--column .vxe-resizable.is--line:before {
+  background-color: var(--vxe-table-border-color);
+}
+.vxe-table .vxe-table--header-wrapper .vxe-table--header-border-line {
+  border-bottom-color: var(--vxe-table-border-color);
+}
+.vxe-table--render-default.border--default .vxe-body--column {
+  background-image: linear-gradient(var(--vxe-table-tr-border-color), var(--vxe-table-tr-border-color));
+}
+.vxe-table .vxe-checkbox--icon.vxe-checkbox--unchecked-icon::before,
+.ant-checkbox-inner {
+  border-color: var(--vxe-table-checkbox-border-color) !important;
+  background-color: var(--vxe-table-checkbox-background-color) !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+.vxe-table .vxe-sort--asc-btn,
+.vxe-table .vxe-sort--desc-btn {
+  color: var(--vxe-table-sort-btn-color);
+}
+.vxe-table .vxe-sort--asc-btn:hover,
+.vxe-table .vxe-sort--desc-btn:hover {
+  color: var(--primary-color);
+}
+
+.asset-group-list .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: var(--group-list-selected-item-background-color);
+  color: var(--group-list-item-hover-color);
+}
+.asset-group-list .ant-menu-item:hover {
+  color: var(--group-list-item-hover-color);
+}
+
+.ant-pro-global-header .content-title h2,
+.ant-card-head .ant-card-head-title {
+  color: var(--title-black-color);
+}
+
+.asset-group-list.ant-card::after {
+  background-color: var(--vxe-table-tr-border-color) !important;
+}
+
+.biz-vxe-table.ant-card {
+  background-color: var(--layout-content-background-color);
+}
+
+.ant-menu-dark .ant-menu-item-selected > a {
+  color: var(--side-menu-hover-color) !important;
+}
+.ant-pro-sider-menu-logo h1 {
+  color: var(--side-menu-logo-color);
+}
+
+.anticon.anticon-question-circle,
+.anticon.anticon-info-circle {
+  color: var(--light-font-color);
+}
+
+.vxe-table--render-default.border--default .vxe-table--header-wrapper .vxe-header--row:last-child .vxe-header--gutter {
+  background-image: linear-gradient(var(--vxe-table-border-color), var(--vxe-table-border-color));
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected {
+  background-color: var(--side-menu-highlight-bg-color) !important;
+}
+
+.ant-menu-dark .ant-menu-inline.ant-menu-sub {
+  box-shadow: var(--side-menu-sub-box-shadow) !important;
+}
+.ant-menu-dark .ant-menu-inline.ant-menu-sub .ant-menu-item-selected > a {
+  color: var(--side-menu-highlight-color) !important;
+}
+.ant-layout .ant-layout-sider {
+  box-shadow: var(--side-menu-box-shadow);
+}
+
+.ant-btn-primary {
+  color: var(--side-menu-highlight-color) !important;
+}
+.ant-menu-inline-collapsed-tooltip a {
+  color: var(--side-menu-highlight-color) !important;
+}

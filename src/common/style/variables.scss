@@ -1,0 +1,25 @@
+$primary-color: #09b3af;
+$primary-font-size: 14px;
+$title-font-size: 16px;
+$primary-font-weight: 400;
+$title-font-weight: 500;
+$light-font-color: rgba(0, 0, 0, 0.45);
+// 浅色背景下的主要文字颜色
+$primary-black-color: rgba(0, 0, 0, 65%);
+// 浅色背景下的title文字颜色
+$title-black-color: rgba(0, 0, 0, 85%);
+$primary-white-color: rgba(255, 255, 255, 65%);
+$title-white-color: rgba(255, 255, 255, 85%);
+
+:root {
+  --primary-color: #{$primary-color};
+  --primary-font-size: #{$primary-font-size};
+  --title-font-size: #{$title-font-size};
+  --primary-font-weight: #{$primary-font-weight};
+  --title-font-weight: #{$title-font-weight};
+  --primary-black-color: #{$primary-black-color};
+  --title-black-color: #{$title-black-color};
+  --primary-white-color: #{$primary-white-color};
+  --title-white-color: #{$title-white-color};
+  --layout-content-background-color: #fff;
+}

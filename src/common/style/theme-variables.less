@@ -1,0 +1,37 @@
+// @import '~ant-design-vue/dist/antd.less';
+@import '~ant-design-vue/lib/style/themes/default.less';
+
+// 定制主题位置，可以替换下面链接的变量
+// https://github.com/vueComponent/ant-design-vue/blob/master/components/style/themes/default.less
+// 改成var(--primary-color)会报错: https://github.com/less/less.js/issues/3338#issuecomment-443601225
+@primary-color: #09b3af;
+@border-radius-base: 2px; // 组件/浮层圆角
+@layout-header-background: #fff;
+@layout-sider-background: #1b253e;
+@btn-default-color: rgba(0, 0, 0, 0.85);
+@menu-dark-color: rgba(255, 255, 255, 0.65);
+.ant-form label {
+  font-size: 14px;
+}
+
+// modal
+.ant-modal-header {
+  padding: 16px 20px;
+}
+.ant-modal-body {
+  padding: 24px 20px;
+}
+.ant-modal-footer {
+  padding: 10px 20px;
+}
+
+.ant-menu-dark .ant-menu-item,
+.ant-menu-dark .ant-menu-item-group-title,
+.ant-menu-dark .ant-menu-item > a,
+.ant-layout .side-menu-item .collapse-btn,
+.ant-layout .side-menu-item .feed-back-btn {
+  color: @text-color-dark;
+  &:hover {
+    color: var(--side-menu-hover-color);
+  }
+}

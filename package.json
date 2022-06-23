@@ -1,0 +1,51 @@
+{
+  "name": "hcms-authorization-console",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue,.ts,.jsx,.tsx src",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{vue,js,ts,jsx,tsx}": "eslint --ext .js,.vue,.ts,.jsx,.tsx src"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "clipboard-polyfill": "^4.0.0-rc1",
+    "dayjs": "^1.11.3",
+    "naive-ui": "^2.30.6",
+    "pinia": "^2.0.14",
+    "vue": "^3.2.37",
+    "vue-router": "^4.0.16",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@vicons/antd": "^0.12.0",
+    "@vicons/carbon": "^0.12.0",
+    "@vicons/fluent": "^0.12.0",
+    "@vicons/ionicons5": "^0.12.0",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "commitizen": "^4.2.4",
+    "commitlint-config-cz": "^0.13.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^8.18.0",
+    "eslint-plugin-vue": "^9.1.1",
+    "husky": "^8.0.1",
+    "less": "^4.1.3",
+    "lint-staged": "^13.0.2",
+    "sass": "^1.52.3",
+    "vfonts": "^0.1.0",
+    "vite": "^2.9.12"
+  },
+  "license": "MIT"
+}

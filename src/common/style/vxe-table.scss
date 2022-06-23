@@ -1,0 +1,73 @@
+@import 'vxe-table/styles/variable.scss';
+
+// 修改样式变量
+$vxe-font-size: $primary-font-size;
+$vxe-font-color: $title-black-color;
+$vxe-primary-color: $primary-color;
+$vxe-border-radius: 2px;
+$vxe-table-header-font-weight: $title-font-weight;
+// tooltip
+$vxe-tooltip-dark-background-color: rgba(0, 0, 0, 0.75);
+$vxe-tooltip-dark-color: #fff;
+// table
+$vxe-table-font-color: $vxe-font-color;
+$vxe-table-header-font-color: $vxe-font-color;
+$vxe-table-header-background-color: #f5f7fa;
+$vxe-table-border-color: #e8eaec;
+$vxe-table-border-radius: $vxe-border-radius;
+
+@import 'vxe-table/styles/modules.scss';
+
+// table-tooltip样式
+$vxe-tooltip-arrow-width: 7.07106781px; // 5*sqrt(2)
+$vxe-tooltip-arrow-width-half: calc(7.07106781px / 2); // 5*sqrt(2)
+.vxe-table--tooltip-wrapper {
+  font-size: 14px;
+  padding: 5px 8px;
+  animation-duration: 0.1s;
+  // animation-fill-mode: both;
+  // animation-play-state: paused;
+  // animation-name: antZoomBigOut;
+  &.is--visible {
+    animation-name: antZoomBigIn;
+  }
+  &.theme--dark .vxe-table--tooltip-arrow {
+    border-top-color: transparent !important;
+    border-bottom-color: transparent !important;
+    width: $vxe-tooltip-arrow-width;
+    height: $vxe-tooltip-arrow-width;
+    &::before {
+      border-width: $vxe-tooltip-arrow-width-half;
+      top: -6px;
+      // left: $vxe-tooltip-arrow-width-half;
+    }
+  }
+}
+
+@keyframes antZoomBigIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes antZoomBigOut {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+
+// checkbox 边框宽度
+.vxe-custom--option .vxe-checkbox--icon:before,
+.vxe-table--render-default .vxe-cell--checkbox .vxe-checkbox--icon:before,
+.vxe-table--filter-option .vxe-checkbox--icon:before,
+.vxe-export--panel-column-option .vxe-checkbox--icon:before {
+  border: 1px solid #d9d9d9;
+}
