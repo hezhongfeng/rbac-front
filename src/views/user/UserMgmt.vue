@@ -16,13 +16,10 @@
     <user-item
       :show="showModel"
       :roles="roles"
-      :organizations="organizations"
-      :clients="clients"
       :item-id="itemId"
       @model-show-change="onModelShowChange"
       @refresh-list="queryList"
     />
-
     <reset-password
       :show="resetModelShow"
       :item-id="itemId"
@@ -58,10 +55,6 @@ const columns = [
   {
     title: '创建时间',
     key: 'createdTime'
-  },
-  {
-    title: '电话号码',
-    key: 'tel'
   },
   {
     title: '角色',
@@ -104,18 +97,6 @@ const { data: rolesData } = useQueryList(urls.user.adminRole, undefined, 9999);
 
 const roles = computed(() => {
   return rolesData.value.list;
-});
-
-const { data: organizationsData } = useQueryList(urls.organization.list, undefined, 9999);
-
-const organizations = computed(() => {
-  return organizationsData.value.list;
-});
-
-const { data: clientsData } = useQueryList(urls.client.list, undefined, 9999);
-
-const clients = computed(() => {
-  return clientsData.value.list;
 });
 
 const { data, loading, pagination, onUpdatePage, onUpdatePageSize, queryList } = useQueryList(urls.user.adminUser);

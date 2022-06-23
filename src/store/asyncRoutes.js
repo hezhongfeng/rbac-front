@@ -71,6 +71,7 @@ export const useAsyncRoutes = defineStore('asyncRoutes', () => {
         });
       }
     }
+    console.log(temporaryMenus);
     // 生成左侧菜单和添加路由
     menus.value = temporaryMenus.filter(item => item.key !== 'test');
     for (const route of routes) {

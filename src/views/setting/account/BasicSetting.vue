@@ -10,14 +10,6 @@
           <n-input v-model:value="formValue.nickname" placeholder="请输入昵称" />
         </n-form-item>
 
-        <n-form-item label="联系电话" path="tel">
-          <n-input v-model:value="formValue.tel" placeholder="请输入联系电话" />
-        </n-form-item>
-
-        <n-form-item label="邮箱" path="email">
-          <n-input v-model:value="formValue.email" placeholder="请输入邮箱" />
-        </n-form-item>
-
         <n-form-item label="简介" path="description">
           <n-input v-model:value="formValue.description" type="textarea" placeholder="请输入简介" />
         </n-form-item>
@@ -51,12 +43,7 @@ const rules = {
       message: '昵称长度为 2-20 个字符',
       trigger: 'blur'
     }
-  ],
-  tel: {
-    required: true,
-    message: '请输入联系电话',
-    trigger: 'blur'
-  }
+  ]
 };
 const formRef = ref(null);
 const message = useMessage();
@@ -69,8 +56,6 @@ const userInfo = root.userInfo;
 const formValue = ref({
   username: userInfo.username,
   nickname: userInfo.nickname,
-  tel: userInfo.tel,
-  email: userInfo.email,
   description: userInfo.description
 });
 
@@ -79,8 +64,6 @@ const save = () => {
     .put(`/api/v1/users/${userInfo.userId}`, {
       id: userInfo.userId,
       nickname: formValue.value.nickname,
-      tel: formValue.value.tel,
-      email: formValue.value.email,
       description: formValue.value.description
     })
     .then(() => {
