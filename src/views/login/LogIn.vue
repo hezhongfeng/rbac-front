@@ -3,26 +3,8 @@
     <div class="view-top">
       <div class="view-account-top-logo">
         <div class="logo-wrapper">
-          <svg
-            t="1629335372672"
-            class="image"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="3061"
-            width="400"
-            height="400"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-          >
-            <path
-              d="M501.093587 349.205672V1024L40.634921 135.417228z m21.812826 0.08127V1024L983.365079 135.520169zM51.400466 120.133079L512 0v330.584042z m921.199068 0L512 0v330.584042z"
-              fill="#09b3af"
-              p-id="3062"
-            />
-          </svg>
+          <img class="image" src="~/assets/logo.svg" alt="logo" />
         </div>
-
-        <div class="logo-text">松果认证</div>
       </div>
     </div>
     <n-form ref="formRef" :model="model" class="form" :rules="rules">
@@ -116,7 +98,7 @@ const rules = {
   flex-direction: column;
   margin: 0 auto;
   .view-top {
-    margin-top: 30%;
+    margin-top: 10%;
     margin-bottom: 10%;
     text-align: center;
     width: 100%;
@@ -131,8 +113,8 @@ const rules = {
         display: flex;
         align-items: center;
         .image {
-          width: 80px;
-          height: 80px;
+          width: 200px;
+          height: 200px;
         }
       }
       .logo-text {

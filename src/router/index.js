@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useRootStore } from '@/store/root';
-import Login from 'views/login/Login.vue';
+import Login from 'views/login/LogIn.vue';
+import Layout from '@/layout/index.vue';
 import Logout from 'views/login/Logout.vue';
 import axios from 'axios';
-
-export const Layout = () => import('@/layout/index.vue');
 
 const routes = [
   {
