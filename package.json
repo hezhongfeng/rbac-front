@@ -23,12 +23,10 @@
     "naive-ui": "^2.30.6",
     "pinia": "^2.0.14",
     "vue": "^3.2.37",
-    "vue-router": "^4.0.16",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.2",
-    "@commitlint/config-conventional": "^17.0.2",
     "@vicons/antd": "^0.12.0",
     "@vicons/carbon": "^0.12.0",
     "@vicons/fluent": "^0.12.0",
@@ -36,6 +34,7 @@
     "@vitejs/plugin-vue": "^2.3.3",
     "commitizen": "^4.2.4",
     "commitlint-config-cz": "^0.13.3",
+    "commitlint-config-git-commit-emoji": "^1.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
     "eslint": "^8.18.0",
