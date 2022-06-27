@@ -8,7 +8,6 @@ import test from '@/router/modules/test.js';
 import router from '@/router';
 
 export const useAsyncRoutes = defineStore('asyncRoutes', () => {
-  const hasAdd = ref(false);
   const menus = ref([]);
 
   // 根据当前用户的权限和路由配置，生成可以访问的路由和菜单

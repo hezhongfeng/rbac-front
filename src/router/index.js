@@ -37,37 +37,34 @@ const beforeEach = async (to, from, next) => {
 
   // 白名单，只允许不登录时候访问
   let whiteRouteList = ['/login'];
+
   if (whiteRouteList.indexOf(to.path) !== -1) {
     if (accessToken) {
+      // 已登录的时候，不允许访问登录页面，直接跳转到主页
       next({ path: '/index/dashboard_console' });
       return true;
     } else {
+      // 未登录时候访问白名单，直接跳转
       next();
       return true;
     }
   }
-  // 正常已登录
-  if (accessToken && hasUserId) {
-    // 导航有效
-    next();
-    return true;
-  }
 
-  // 没登录
+  // 没有 token，相当于没登录
   if (!accessToken) {
     // 定位到登录页
     next('/login');
     return true;
   }
 
-  // const hasAdd = store.state.asyncroute.hasAdd;
-  // // 已添加动态路由后，可以直接进行跳转
-  // if (hasAdd) {
-  //   next();
-  //   return true;
-  // }
+  // 有 token 并且有当前用户信息，相当于已登录
+  if (accessToken && hasUserId) {
+    // 导航有效
+    next();
+    return true;
+  }
 
-  // 已登录，在刷新页面
+  // 有 token，但是没有当前用户信息，需要获取用户信息
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
   // 注意这里不能使用回调的方式，必须await
   await root.getCurrentUser();
