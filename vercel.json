@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "api/(.*)", "destination": "https://boot-rbac.herokuapp.com/api" }]
+}
