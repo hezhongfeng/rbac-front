@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import { useRootStore } from '@/store/root';
 import Login from 'views/login/LogIn.vue';
 import Layout from '@/layout/index.vue';
-import Logout from 'views/login/Logout.vue';
+import Logout from 'views/login/LogOut.vue';
 import axios from 'axios';
 
 const routes = [
