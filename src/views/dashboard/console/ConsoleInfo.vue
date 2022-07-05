@@ -1,5 +1,5 @@
 <template>
-  <div class="console" @click="onClick">
+  <div class="console">
     <n-card :title="nickname"> 早安，开始您一天的工作吧! </n-card>
   </div>
 </template>

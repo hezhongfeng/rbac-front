@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import dashboard from '@/router/modules/dashboard.js';
 import setting from '@/router/modules/setting.js';
 import user from '@/router/modules/user.js';
+import custom from '@/router/modules/custom.js';
 import test from '@/router/modules/test.js';
 import router from '@/router';
 
@@ -14,7 +15,7 @@ export const useAsyncRoutes = defineStore('asyncRoutes', () => {
   const generateRoutes = ({ permissions, cb }) => {
     const temporaryMenus = [];
     const routes = [];
-    for (const item of [dashboard, user, test, setting]) {
+    for (const item of [dashboard, user, custom, test, setting]) {
       const accessedRouters = [];
       const node = {
         icon: item.meta.icon,
