@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useRootStore } from '@/store/root';
 import router from '@/router';
+import { useRootStore } from '@/store/root';
 import { refreshTokenRequest, createRequest, addRequestList } from './refreshToken';
 
 axios.defaults.baseURL = window.location.origin;
@@ -10,9 +10,10 @@ axios.interceptors.response.handlers.length = 0;
 
 // 清空本地所有登录信息并跳转到登录页面
 const logout = () => {
+  const root = useRootStore();
   root.updateUserId(null);
   // 清除 token
-  root.updateToken('');
+  root.updateAccessToken('');
   root.updateRefreshToken('');
 
   err.message = '请重新登录';
@@ -38,7 +39,6 @@ axios.interceptors.response.use(
     throw data;
   },
   err => {
-    const root = useRootStore();
     // 这里是返回 http 状态码不为 200和304 时候的错误处理
     if (err && err.response) {
       switch (err.response.status) {
@@ -52,8 +52,8 @@ axios.interceptors.response.use(
             break;
           }
           // 判断是否有 refreshToken
-          const refreshToken = localStorage.getItem('refresh_token');
-          if (!refreshToken) {
+          const root = useRootStore();
+          if (!root.refreshToken) {
             logout();
             break;
           }
@@ -64,7 +64,7 @@ axios.interceptors.response.use(
           // 这里很重要，因为本次请求 401 了，要返回给调用接口的方法返回一个新的请求
           return new Promise(resolve => {
             addRequestList(() => {
-              // 注意这里的createRequest函数执行的时候是在resolve开始执行的时候次奥跟着执行
+              // 注意这里的createRequest函数执行的时候是在resolve开始执行的时候，并且返回一个新的Promise，这个新的Promise会代替接口调用的那个
               resolve(createRequest(config));
             });
           });

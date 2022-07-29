@@ -97,7 +97,8 @@ const doLogout = () => {
     positiveText: '确定',
     negativeText: '取消',
     onPositiveClick: () => {
-      root.updateToken('');
+      root.updateAccessToken('');
+      root.updateRefreshToken('');
       root.updateUserId(null);
       setTimeout(() => {
         // 等待清除我完毕

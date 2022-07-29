@@ -19,7 +19,7 @@ const refreshTokenRequest = () => {
     refreshToken: root.refreshToken
   };
   http.post('/api/v1/refresh-token', params).then(({ data }) => {
-    root.updateToken(data.token);
+    root.updateAccessToken(data.token);
     root.updateRefreshToken(data.refreshToken);
     root.updateUserId(data.user);
     for (const request of tempRequestList) {
@@ -35,9 +35,9 @@ const addRequestList = request => {
 };
 
 const createRequest = config => {
-  // 这里可以修改header中的AccessToken
-  const accessToken = localStorage.getItem('access_token');
-  config.headers['Authorization'] = 'Bearer ' + accessToken;
+  // 这里必须更新 header 中的 AccessToken
+  const root = useRootStore();
+  config.headers['Authorization'] = 'Bearer ' + root.accessToken;
   return axios(config);
 };
 

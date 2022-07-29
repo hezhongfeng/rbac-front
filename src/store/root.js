@@ -6,7 +6,7 @@ import http from '@/utils/http';
 import { useAsyncRoutes } from './asyncRoutes';
 
 export const useRootStore = defineStore('root', () => {
-  const accseeToken = ref('');
+  const accessToken = ref('');
   const refreshToken = ref('');
   const userId = ref(null);
   const username = ref('');
@@ -22,8 +22,8 @@ export const useRootStore = defineStore('root', () => {
     };
   });
 
-  const updateToken = token => {
-    accseeToken.value = token;
+  const updateAccessToken = token => {
+    accessToken.value = token;
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     localStorage.setItem('access_token', token);
   };
@@ -72,12 +72,12 @@ export const useRootStore = defineStore('root', () => {
   return {
     userId,
     username,
-    accseeToken,
+    accessToken,
     refreshToken,
     nickname,
     userInfo,
     updateUserId,
-    updateToken,
+    updateAccessToken,
     updateRefreshToken,
     getCurrentUser
   };

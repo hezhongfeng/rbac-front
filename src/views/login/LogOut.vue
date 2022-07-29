@@ -15,7 +15,8 @@ const root = useRootStore();
 const router = useRouter();
 
 const logout = () => {
-  root.updateToken('');
+  root.updateAccessToken('');
+  root.updateRefreshToken('');
   root.updateUserId(null);
   // 等待清除完毕
   nextTick(() => {

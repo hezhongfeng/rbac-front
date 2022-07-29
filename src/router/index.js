@@ -67,9 +67,8 @@ const beforeEach = async (to, from, next) => {
 
   // 有 token，但是没有当前用户信息，需要获取用户信息
   axios.defaults.headers.common['Authorization'] = 'Bearer ' + accessToken;
-  root.updateToken(accessToken);
+  root.updateAccessToken(accessToken);
   root.updateRefreshToken(refreshToken);
-  console.log(root.accseeToken);
   // 注意这里不能使用回调的方式，必须await
   await root.getCurrentUser();
   next({ ...to, replace: true });
