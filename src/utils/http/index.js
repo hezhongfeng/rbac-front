@@ -1,54 +1,25 @@
 import axios from 'axios';
 import { useRootStore } from '@/store/root';
 import router from '@/router';
+import { refreshTokenRequest, createRequest, addRequestList } from './refreshToken';
 
 axios.defaults.baseURL = window.location.origin;
 
 // vite HMR会导致模块重复加载，重复设置拦截器，这里手动给清除下
 axios.interceptors.response.handlers.length = 0;
 
-const tempRequest = [];
+// 清空本地所有登录信息并跳转到登录页面
+const logout = () => {
+  root.updateUserId(null);
+  // 清除 token
+  root.updateToken('');
+  root.updateRefreshToken('');
 
-let isRefreshing = false;
-
-const refreshTokenRequst = () => {
-  console.log('refreshTokenRequst');
-  const root = useRootStore();
-  // 使用刷新token请求新的accesstoken和刷新token
-  const params = {
-    refreshToken: root.refreshToken
-  };
-  http.post('/api/v1/refresh-token', params).then(({ data }) => {
-    console.log('refreshTokenRequst res', data);
-    root.updateToken(data.token);
-    root.updateRefreshToken(data.refreshToken);
-    root.updateUserId(data.user);
-    root.getCurrentUser(() => {
-      // 跳转到主页
-      router.push('/index/dashboard_console');
-    });
-    setTimeout(() => {
-      for (const request of tempRequest) {
-        request();
-      }
-      tempRequest.length = 0;
-      isRefreshing = false;
-    }, 5000);
-  });
-};
-
-const handleExpired = request => {
-  tempRequest.push(request);
-  if (!isRefreshing) {
-    isRefreshing = true;
-  }
-};
-
-const createRequest = config => {
-  console.log('createRequest');
-  // 这里可以修改header中的AccessToken
-  config.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token');
-  return axios(config);
+  err.message = '请重新登录';
+  // 这里的延时是为了显示下上面的提示信息
+  setTimeout(() => {
+    router.replace('/login');
+  }, 10);
 };
 
 // 响应拦截器
@@ -76,27 +47,23 @@ axios.interceptors.response.use(
           break;
 
         case 401:
-          // 登录页登录，不需要处理
+          // accesstoken 错误
           if (router.currentRoute.path === '/login') {
             break;
           }
-          // 判断是否有refershToken
-          if (!root.refreshToken) {
-            root.updateUserId(null);
-            // 清除无效 token
-            root.updateToken('');
-            root.updateRefreshToken('');
-
-            err.message = '未授权，请登录';
-            setTimeout(() => {
-              router.replace('/login');
-            }, 10);
+          // 判断是否有 refreshToken
+          const refreshToken = localStorage.getItem('refresh_token');
+          if (!refreshToken) {
+            logout();
+            break;
           }
           // 进入刷新 token 流程
+          // 本次请求的所有配置信息，包含了 url、method、data、header 等信息
           const config = err?.config;
-          refreshTokenRequst();
+          refreshTokenRequest();
+          // 这里很重要，因为本次请求 401 了，要返回给调用接口的方法返回一个新的请求
           return new Promise(resolve => {
-            handleExpired(() => {
+            addRequestList(() => {
               // 注意这里的createRequest函数执行的时候是在resolve开始执行的时候次奥跟着执行
               resolve(createRequest(config));
             });
@@ -104,15 +71,8 @@ axios.interceptors.response.use(
           break;
 
         case 403:
-          root.updateUserId(null);
-          // 清除 token
-          root.updateToken('');
-          root.updateRefreshToken('');
-
-          err.message = '未授权，请登录';
-          setTimeout(() => {
-            router.replace('/login');
-          }, 10);
+          // 403 这里说明刷新token失败，登录已经到期，需要重新登录
+          logout();
           break;
 
         case 404:
@@ -150,7 +110,6 @@ axios.interceptors.response.use(
         default:
       }
     }
-    console.log(137);
     return Promise.reject(err);
   }
 );
