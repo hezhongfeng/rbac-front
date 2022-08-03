@@ -21,7 +21,7 @@ const refreshTokenRequest = () => {
   http.post('/api/v1/refresh-token', params).then(({ data }) => {
     root.updateAccessToken(data.token);
     root.updateRefreshToken(data.refreshToken);
-    root.updateUserId(data.user);
+    root.updateUserId(data.userId);
     for (const request of tempRequestList) {
       request();
     }

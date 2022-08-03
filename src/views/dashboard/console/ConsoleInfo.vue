@@ -9,9 +9,6 @@ import { computed } from 'vue';
 import { useRootStore } from '@/store/root';
 const root = useRootStore();
 
-console.log(root.userId);
-console.log(root.refreshToken);
-
 const nickname = computed(() => root.nickname);
 </script>
 

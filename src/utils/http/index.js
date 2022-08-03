@@ -16,11 +16,7 @@ const logout = () => {
   root.updateAccessToken('');
   root.updateRefreshToken('');
 
-  err.message = '请重新登录';
-  // 这里的延时是为了显示下上面的提示信息
-  setTimeout(() => {
-    router.replace('/login');
-  }, 10);
+  router.replace('/login');
 };
 
 // 响应拦截器
