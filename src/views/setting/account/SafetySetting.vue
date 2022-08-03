@@ -102,7 +102,8 @@ const updatePassword = () => {
     .then(() => {
       showModal.value = false;
       message.success('修改成功，请重新登录');
-      root.updateToken('');
+      root.updateAccessToken('');
+      root.updateRefreshToken('');
       root.updateUserId(null);
       // 等待清除我完毕
       nextTick(() => {

@@ -58,7 +58,8 @@ const login = () => {
     .then(async ({ data }) => {
       console.log('登录成功');
       message.success('登录成功!');
-      root.updateToken(data.token);
+      root.updateAccessToken(data.token);
+      root.updateRefreshToken(data.refreshToken);
       root.updateUserId(data.user);
       root.getCurrentUser(() => {
         // 跳转到主页
