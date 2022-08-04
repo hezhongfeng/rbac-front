@@ -40,7 +40,7 @@ const refreshTokenRequest = () => {
     // 1 min 后清除标志位
     setTimeout(() => {
       refreshTokenWithin1Minute = false;
-    }, 6000);
+    }, 60000);
     tempRequestList.length = 0;
     isRefreshing = false;
   });
