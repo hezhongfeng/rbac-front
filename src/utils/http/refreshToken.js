@@ -12,8 +12,6 @@ let isRefreshing = false;
 // 为了防止并发的时候，刷新请求完毕，tempRequestList也已经清空，之后仍有请求返回403，造成重复刷新
 let refreshTokenWithin1Minute = false;
 
-let clearTempRequestTimer = null;
-
 const refreshTokenRequest = () => {
   if (isRefreshing) {
     return;
@@ -42,7 +40,7 @@ const refreshTokenRequest = () => {
     // 1 min 后清除标志位
     setTimeout(() => {
       refreshTokenWithin1Minute = false;
-    }, 60000);
+    }, 6000);
     tempRequestList.length = 0;
     isRefreshing = false;
   });
@@ -50,16 +48,10 @@ const refreshTokenRequest = () => {
 
 const addRequestList = request => {
   tempRequestList.push(request);
+};
 
-  // 2 min 后清除所有缓存的请求
-  if (clearTempRequestTimer) {
-    return;
-  }
-  clearTempRequestTimer = setTimeout(() => {
-    tempRequestList.length = 0;
-    clearTimeout(clearTempRequestTimer);
-    clearTempRequestTimer = null;
-  }, 120000);
+const clearTempRequestList = () => {
+  tempRequestList.length = 0;
 };
 
 const createRequest = config => {
@@ -69,4 +61,4 @@ const createRequest = config => {
   return axios(config);
 };
 
-export { refreshTokenRequest, createRequest, addRequestList };
+export { refreshTokenRequest, createRequest, addRequestList, clearTempRequestList };
