@@ -56,15 +56,15 @@ axios.interceptors.response.use(
           // 进入刷新 token 流程
           // 本次请求的所有配置信息，包含了 url、method、data、header 等信息
           const config = err?.config;
-          refreshTokenRequest();
-          // 这里很重要，因为本次请求 401 了，要返回给调用接口的方法返回一个新的请求
-          return new Promise(resolve => {
+          const requestPromise = new Promise(resolve => {
             addRequestList(() => {
               // 注意这里的createRequest函数执行的时候是在resolve开始执行的时候，并且返回一个新的Promise，这个新的Promise会代替接口调用的那个
               resolve(createRequest(config));
             });
           });
-          break;
+          refreshTokenRequest();
+          // 这里很重要，因为本次请求 401 了，要返回给调用接口的方法返回一个新的请求
+          return requestPromise;
 
         case 403:
           // 403 这里说明刷新token失败，登录已经到期，需要重新登录
