@@ -1,7 +1,7 @@
 import axios from 'axios';
 import router from '@/router';
 import { useRootStore } from '@/store/root';
-import { refreshTokenRequest, createRequest, addRequestList, clearTempRequestList } from './refreshToken';
+import { refreshTokenRequest, createRequest, addRequestList } from './refreshToken';
 
 axios.defaults.baseURL = window.location.origin;
 
@@ -68,10 +68,6 @@ axios.interceptors.response.use(
 
         case 403:
           // 403 这里说明刷新token失败，登录已经到期，需要重新登录
-          // 10 秒后清除所有缓存的请求
-          setTimeout(() => {
-            clearTempRequestList();
-          }, 10000);
           logout();
           break;
 
